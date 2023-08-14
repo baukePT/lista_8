@@ -43,6 +43,7 @@ Aluno ler_aluno(FILE *file);
 void exibe_aluno(Aluno a);
 float calcula_media(float* notas);
 
+/* funçoes para o manuseio da lista*/
 TLista* cria_lista();
 TLista* destroi_lista(TLista* alunos);
 void insere_no_fim(TLista *alunos, Aluno aluno);
@@ -50,8 +51,8 @@ void insere_no_fim(TLista *alunos, Aluno aluno);
 /* Funções para uso livre */
 void exibe_lista(TLista* alunos); // exibe uma lista de alunos
 void ler_string(char* s); // le uma string de forma "segura"
-
 void lerLinha(char linha[MAX], FILE *arq);
+void quick_sort(TLista *alunos);
 
 int main (int argc, char *argv[])
 {
@@ -172,4 +173,8 @@ void lerLinha(char linha[MAX], FILE *arq){
 fgets(linha, MAX, arq);
 if(linha[strlen(linha)-1] == '\n')
 linha[strlen(linha)-1] = '\0';
+}
+
+void quick_sort(TLista *alunos) {
+
 }
