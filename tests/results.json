@@ -1,0 +1,1 @@
+{"tests": {"Exerc\u00edcio 1": {"weight": 1, "status": "fail"}, "Exerc\u00edcio 2": {"weight": 1, "status": "fail"}, "Exerc\u00edcio 3": {"weight": 1, "status": "fail"}, "Exerc\u00edcio 4": {"weight": 1, "status": "fail"}}, "total": {"total_tests": 4, "passed": 0, "total_weights": 4, "grade": 0.0}}

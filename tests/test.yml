@@ -1,0 +1,29 @@
+"Exercício 1":
+  command: "./bin/ex1.out"
+  stdin: [["Rodrigo 2 3 4 5\nAlexandre 10 10 8 9\nDiego 7 8 10 10"]]
+  stdout: ["(Rodrigo | 3.50) -> (Alexandre | 9.25) -> (Diego | 8.75)"]
+  prompts: ["(.*):"]
+  weight: 1
+  hints: ['', '', '']
+
+"Exercício 2":
+  command: "./bin/ex2.out"
+  stdin: [""]
+  stdout: ["(Rodrigo | 2.50) -> (Alexandre | 9.25) -> (Diego | 7.50) -> (Ahmad | 10.00) -> (Joao | 5.75)"]
+  weight: 1
+  hints: ['', '', '']
+
+"Exercício 3":
+  command: "./bin/ex3.out"
+  stdin: [["Rodrigo"], ["Alexandre"], ["OI"]]
+  prompts: ["(.*):"]
+  stdout: ["(Rodrigo | 2.50)", "(Alexandre | 9.25)", "não"]
+  weight: 1
+  hints: ['', '', '']
+
+"Exercício 4":
+  command: "./bin/ex4.out"
+  stdin: [""]
+  stdout: ["(Rodrigo | 2.50) -> (Joao | 5.75) -> (Diego | 7.50) -> (Alexandre | 9.25) -> (Ahmad | 10.00)"]
+  weight: 1
+  hints: ['', '', '']
