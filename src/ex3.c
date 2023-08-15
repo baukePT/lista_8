@@ -22,8 +22,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdbool.h>
-
 
 #define MAX 100
 
@@ -86,7 +84,7 @@ int main (int argc, char *argv[])
   ler_string(nome);
 
   aluno = search(lista_alunos, nome);
-  if (aluno.nome == "") {
+  if (!strcmp(aluno.nome,"")) {
     printf("O aluno nao foi encontrado...");
   }
   else {
@@ -196,7 +194,7 @@ Aluno search (TLista *alunos, char nome[MAX]) {
   };
 
   const char* nome_aluno = alunos->aluno.nome;
-  if (strcmp(nome_aluno, nome) == 0) {
+  if (!strcmp(nome_aluno, nome)) {
     strcpy(aux.nome, alunos->aluno.nome);
     aux.media = alunos->aluno.media;
     return aux;
