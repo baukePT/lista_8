@@ -38,7 +38,8 @@ void insere_no_fim(TLista *alunos, Aluno aluno);
 void exibe_lista(TLista* alunos); // exibe uma lista de alunos
 void ler_string(char* s); // le uma string de forma "segura"
 void lerLinha(char linha[MAX], FILE *arq);
-Aluno search (TLista *alunos, char nome[MAX]);
+int bubbleSort(TLista** alunos, int count);
+TLista* swap(TLista *a, TLista *b);
 
 
 int main (int argc, char *argv[])
@@ -47,11 +48,9 @@ int main (int argc, char *argv[])
 
   TLista *lista_alunos;
   lista_alunos = cria_lista();
-
+  int count = 0;
   Aluno aluno;
   FILE *file;
-
-  char nome[MAX];
 
   file = fopen("../../notas.csv", "r");
   if (file == NULL) {
@@ -63,21 +62,16 @@ int main (int argc, char *argv[])
   aluno = ler_aluno(file);
 
   insere_no_fim(lista_alunos, aluno);
+  count++;
 
   } while (!feof(file));
 
   fclose(file);
 
-  printf("Digite o nome do aluno a ser buscado: ");
-  ler_string(nome);
 
-  aluno = search(lista_alunos, nome);
-  if (!strcmp(aluno.nome,"")) {
-    printf("O aluno nao foi encontrado...");
-  }
-  else {
-    exibe_aluno(aluno);
-  }
+
+  bubbleSort(&lista_alunos, count);
+  exibe_lista(lista_alunos);
 
   lista_alunos = destroi_lista(lista_alunos);
   return EXIT_SUCCESS;
@@ -174,19 +168,43 @@ if(linha[strlen(linha)-1] == '\n')
 linha[strlen(linha)-1] = '\0';
 }
 
-Aluno search (TLista *alunos, char nome[MAX]) {
-  Aluno aux;
-  if (alunos == NULL) {
-    strcpy(aux.nome, "");
-    return aux;
-  };
-
-  const char* nome_aluno = alunos->aluno.nome;
-  if (!strcmp(nome_aluno, nome)) {
-    strcpy(aux.nome, alunos->aluno.nome);
-    aux.media = alunos->aluno.media;
-    return aux;
-  };
-
-  return search(alunos->prox, nome);
+/*Function to swap the nodes */
+TLista* swap(TLista* ptr1, TLista* ptr2)
+{
+    TLista* tmp = ptr2->prox;
+    ptr2->prox = ptr1;
+    ptr1->prox = tmp;
+    return ptr2;
+}
+ 
+/* Function to sort the list */
+int bubbleSort(TLista** alunos, int count)
+{
+    TLista** h;
+    int i, j, swapped;
+ 
+    for (i = 0; i <= count; i++) {
+ 
+        h = alunos;
+        swapped = 0;
+ 
+        for (j = 0; j < count - i - 1; j++) {
+ 
+            TLista* p1 = *h;
+            TLista* p2 = p1->prox;
+ 
+            if (p1->aluno.media > p2->aluno.media) {
+ 
+                /* update the link after swapping */
+                *h = swap(p1, p2);
+                swapped = 1;
+            }
+ 
+            h = &(*h)->prox;
+        }
+ 
+        /* break if the loop ended without any swap */
+        if (swapped == 0)
+            break;
+    }
 }
