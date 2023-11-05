@@ -85,13 +85,15 @@ int main (int argc, char *argv[])
 
   aluno = search(lista_alunos, nome);
   if (!strcmp(aluno.nome,"")) {
-    printf("O aluno nao foi encontrado...");
+    printf("O aluno nao foi encontrado...\n");
   }
   else {
     exibe_aluno(aluno);
+    printf("\n");
   }
-
+  system("pause");
   lista_alunos = destroi_lista(lista_alunos);
+  
   return EXIT_SUCCESS;
 }
 

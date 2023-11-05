@@ -62,6 +62,7 @@ int main (int argc, char *argv[])
   } while (i < MAX_ALUNOS);
 
   exibe_lista(lista_alunos);
+  system("pause");
   lista_alunos = destroi_lista(lista_alunos);
 
   return EXIT_SUCCESS;

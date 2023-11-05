@@ -38,11 +38,10 @@ void insere_no_fim(TLista *alunos, Aluno aluno);
 void exibe_lista(TLista* alunos); // exibe uma lista de alunos
 void ler_string(char* s); // le uma string de forma "segura"
 void lerLinha(char linha[MAX], FILE *arq);
-int bubbleSort(TLista** alunos, int count);
-TLista* swap(TLista *a, TLista *b);
+void bubble_sort(TLista *alunos);
+void swap(TLista *a, TLista *b);
 
-
-int main (int argc, char *argv[])
+int main(int argc, char *argv[])
 {
   system("cls");
 
@@ -68,12 +67,11 @@ int main (int argc, char *argv[])
 
   fclose(file);
 
-
-
-  bubbleSort(&lista_alunos, count);
+  bubble_sort(lista_alunos);
   exibe_lista(lista_alunos);
 
   lista_alunos = destroi_lista(lista_alunos);
+  system("pause");
   return EXIT_SUCCESS;
 }
 
@@ -168,43 +166,33 @@ if(linha[strlen(linha)-1] == '\n')
 linha[strlen(linha)-1] = '\0';
 }
 
-/*Function to swap the nodes */
-TLista* swap(TLista* ptr1, TLista* ptr2)
-{
-    TLista* tmp = ptr2->prox;
-    ptr2->prox = ptr1;
-    ptr1->prox = tmp;
-    return ptr2;
-}
- 
-/* Function to sort the list */
-int bubbleSort(TLista** alunos, int count)
-{
-    TLista** h;
-    int i, j, swapped;
- 
-    for (i = 0; i <= count; i++) {
- 
-        h = alunos;
-        swapped = 0;
- 
-        for (j = 0; j < count - i - 1; j++) {
- 
-            TLista* p1 = *h;
-            TLista* p2 = p1->prox;
- 
-            if (p1->aluno.media > p2->aluno.media) {
- 
-                /* update the link after swapping */
-                *h = swap(p1, p2);
-                swapped = 1;
-            }
- 
-            h = &(*h)->prox;
-        }
- 
-        /* break if the loop ended without any swap */
-        if (swapped == 0)
-            break;
+//bubble sort for linked list
+void bubble_sort(TLista* alunos) {
+  int swapped;
+  TLista *ptr1;
+  TLista *lptr = NULL;
+
+  /* Checking for empty list */
+  if (alunos->prox == NULL)
+    return;
+
+  do {
+    swapped = 0;
+    ptr1 = alunos->prox;
+
+    while (ptr1->prox != lptr) {
+      if (ptr1->aluno.media < ptr1->prox->aluno.media) {
+        swap(ptr1, ptr1->prox);
+        swapped = 1;
+      }
+      ptr1 = ptr1->prox;
     }
+    lptr = ptr1;
+  } while (swapped);
+}
+
+void swap(TLista *a, TLista *b) {
+  Aluno temp = a->aluno;
+  a->aluno = b->aluno;
+  b->aluno = temp;
 }
